@@ -1,0 +1,44 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches:
+      - main  # Se ejecuta al hacer push a la rama main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/futurociertoapi:latest
+          # Puedes cambiar 'latest' por 'v1' u otra etiqueta si lo prefieres
+
+      - name: Deploy to AWS via SSH
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.AWS_HOST }}         # IP o dominio de tu instancia AWS
+          username: ${{ secrets.AWS_USER }}       # Usuario SSH (por ejemplo, ec2-user)
+          key: ${{ secrets.AWS_SSH_KEY }}         # Tu clave privada (en formato de texto) para SSH
+          port: 22                              # Puerto SSH, normalmente 22
+          script: |
+            echo "Deteniendo contenedor actual (si existe)..."
+            docker stop futurocierto_container || true
+            docker rm futurocierto_container || true
+            echo "Extrayendo imagen actualizada..."
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/futurociertoapi:latest
+            echo "Ejecutando nuevo contenedor..."
+            docker run -d -p 8080:8080 --name futurocierto_container ${{ secrets.DOCKERHUB_USERNAME }}/futurociertoapi:latest
