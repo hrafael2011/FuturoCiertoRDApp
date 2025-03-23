@@ -181,7 +181,7 @@ CORS_ALLOWED_ORIGINS = ['http://localhost:5173',
                         'https://new-page.futurociertord.org'
                         'https://draacostafit.com',
                         ],
-#CORS_ALLOW_ALL_ORIGINS = True 
+
 
 
 
