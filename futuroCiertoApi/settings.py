@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ['futurociertord.azurewebsites.net',
                  '3.12.151.15',
                  '127.0.0.1',
                  'localhost',
-                 'draacostafit.com'
+                 #'draacostafit.com'
                  ]
 
 
@@ -40,7 +40,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000/',
     'http://127.0.0.1:8000/',
     'http://3.12.151.15:8080',
-    'https://draacostafit.com'
+    #'https://draacostafit.com'
     
 
 
@@ -178,7 +178,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 
                         'http://10.0.0.58:5173',  
                         'https://new-page.futurociertord.org',
-                        'https://draacostafit.com',
+                        #'https://draacostafit.com',
                         ]
 CORS_ALLOW_ALL_ORIGINS = False 
 
