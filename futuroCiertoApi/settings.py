@@ -36,23 +36,14 @@ ALLOWED_HOSTS = ['futurociertord.azurewebsites.net',
 
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://futurociertord.azurewebsites.net',  # Dominio de tu app con HTTPS
-    'http://futurociertord.azurewebsites.net',
     'http://localhost:8000/',
     'http://127.0.0.1:8000/',
     'http://3.12.151.15:8080',
-    #'https://draacostafit.com'
     'http://draacostafit.com',       # Versión HTTP sin 'www'
     'https://draacostafit.com',      # Versión HTTPS sin 'www'
     'http://www.draacostafit.com',   # Versión HTTP con 'www'
     'https://www.draacostafit.com',  # Versión HTTPS con 'www'
 
-    
-
-
-      # Si usas HTTP (temporalmente)
-
-    
 ]
 
 
@@ -184,10 +175,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 
                         'http://10.0.0.58:5173',  
                         'https://new-page.futurociertord.org',
-                        'http://draacostafit.com',       # Versión HTTP sin 'www'
-                        'https://draacostafit.com',      # Versión HTTPS sin 'www'
-                        'http://www.draacostafit.com',   # Versión HTTP con 'www'
-                        'https://www.draacostafit.com',  # Versión HTTPS con 'www'
+                        'http://draacostafit.com',       
+                        'https://draacostafit.com',      
+                        'http://www.draacostafit.com',   
+                        'https://www.draacostafit.com'  
 
                         ]
 #CORS_ALLOW_ALL_ORIGINS = True 
