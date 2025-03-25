@@ -18,4 +18,4 @@ RUN python manage.py collectstatic --noinput
 EXPOSE 8000
 
 # Comando para iniciar Gunicorn cuando el contenedor se inicie
-CMD ["gunicorn", "futuroCiertoApi.wsgi:application", "--bind", "0.0.0.0:8080", "--workers=3", "--timeout=120"]
+CMD ["gunicorn", "futuroCiertoApi.wsgi:application", "--bind", "0.0.0.0:8000", "--workers=3", "--timeout=120"]
