@@ -178,7 +178,7 @@ CORS_ALLOWED_ORIGINS = ['http://localhost:5173',
                         'http://draacostafit.com',       
                         'https://draacostafit.com',      
                         'http://www.draacostafit.com',   
-                        'https://www.draacostafit.com'  
+                        'https://www.draacostafit.com' 
 
                         ]
 #CORS_ALLOW_ALL_ORIGINS = True 
