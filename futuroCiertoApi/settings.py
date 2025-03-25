@@ -178,7 +178,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 
                         'http://10.0.0.58:5173',  
                         'https://new-page.futurociertord.org',
-                        #'https://draacostafit.com',
+                        'http://draacostafit.com',       # Versión HTTP sin 'www'
+                        'https://draacostafit.com',      # Versión HTTPS sin 'www'
+                        'http://www.draacostafit.com',   # Versión HTTP con 'www'
+                        'https://www.draacostafit.com',  # Versión HTTPS con 'www'
+
                         ]
 CORS_ALLOW_ALL_ORIGINS = False 
 
