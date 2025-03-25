@@ -30,7 +30,8 @@ ALLOWED_HOSTS = ['futurociertord.azurewebsites.net',
                  '3.12.151.15',
                  '127.0.0.1',
                  'localhost',
-                 #'draacostafit.com'
+                 'draacostafit.com',
+                 'www.draacostafit.com'
                  ]
 
 
@@ -41,6 +42,11 @@ CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000/',
     'http://3.12.151.15:8080',
     #'https://draacostafit.com'
+    'http://draacostafit.com',       # Versión HTTP sin 'www'
+    'https://draacostafit.com',      # Versión HTTPS sin 'www'
+    'http://www.draacostafit.com',   # Versión HTTP con 'www'
+    'https://www.draacostafit.com',  # Versión HTTPS con 'www'
+
     
 
 
@@ -184,7 +190,7 @@ CORS_ALLOWED_ORIGINS = ['http://localhost:5173',
                         'https://www.draacostafit.com',  # Versión HTTPS con 'www'
 
                         ]
-CORS_ALLOW_ALL_ORIGINS = True 
+#CORS_ALLOW_ALL_ORIGINS = True 
 
 
 
