@@ -15,7 +15,7 @@ RUN pip install -r requirements.txt
 RUN python manage.py collectstatic --noinput
 
 # Exponer el puerto 8080 donde se ejecutará la aplicación
-EXPOSE 8080
+EXPOSE 8000
 
 # Comando para iniciar Gunicorn cuando el contenedor se inicie
-CMD ["gunicorn", "futuroCiertoApi.wsgi:application", "--bind", "0.0.0.0:8080", "--workers=3"]
+CMD ["gunicorn", "futuroCiertoApi.wsgi:application", "--bind", "0.0.0.0:8080", "--workers=3", "--timeout=120"]
