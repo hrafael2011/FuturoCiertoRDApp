@@ -184,7 +184,7 @@ CORS_ALLOWED_ORIGINS = ['http://localhost:5173',
                         'https://www.draacostafit.com',  # Versión HTTPS con 'www'
 
                         ]
-CORS_ALLOW_ALL_ORIGINS = False 
+CORS_ALLOW_ALL_ORIGINS = True 
 
 
 
