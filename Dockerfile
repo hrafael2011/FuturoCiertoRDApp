@@ -14,7 +14,7 @@ RUN pip install -r requirements.txt
 # Recolectar archivos estáticos
 RUN python manage.py collectstatic --noinput
 
-# Exponer el puerto 8080 donde se ejecutará la aplicación
+# Exponer el puerto 8000 donde se ejecutará la aplicación
 EXPOSE 8000
 
 # Comando para iniciar Gunicorn cuando el contenedor se inicie
