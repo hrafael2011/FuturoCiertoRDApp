@@ -165,10 +165,17 @@ class causeView(viewsets.ModelViewSet):
         context.update({"language": language, "request": self.request})
         return context
 
-
 class collaboratorView(viewsets.ModelViewSet):
     queryset = collaborator.objects.filter(is_active=True)
     serializer_class = collaboratorSerializer
+
+    def get_serializer_context(self):
+        # Pasar el objeto request al contexto
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
+
+    
 
 
 class videoView(viewsets.ModelViewSet):

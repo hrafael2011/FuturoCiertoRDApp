@@ -17,7 +17,9 @@ import os
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 # Base Url
-BASE_URL = 'https://draacostafit.com'
+#BASE_URL = 'https://draacostafit.com'
+BASE_URL ='http://127.0.0.1:8000'
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -199,13 +201,13 @@ REST_FRAMEWORK = {
 
 
 #Media files
-#MEDIA_URL = '/media/'
+MEDIA_URL = '/media/'
 #MEDIA_URL = 'https://draacostafit.com/media/'
 
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = '/home/ec2-user/media/'
+#MEDIA_URL = '/media/'
+#MEDIA_ROOT = '/home/ec2-user/media/'
 
 
 from decouple import config

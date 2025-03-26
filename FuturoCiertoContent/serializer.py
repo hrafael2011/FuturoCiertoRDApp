@@ -128,9 +128,9 @@ class bannerSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
         if obj.Image:  # Asegúrate de que la imagen existe
             if request:
-                return request.build_absolute_uri(obj.Image.url)
+                return request.build_absolute_uri(obj.banner.Image)
             else:
-                return f"{settings.BASE_URL}{obj.Image.url}"
+                return f"{settings.BASE_URL}{obj.banner.Image}"
         return None
 
 
@@ -167,10 +167,25 @@ class causeSerializer(serializers.ModelSerializer):
         model = causes
         fields = ('CauseID', 'Cause', 'Cause_en', 'Image', 'Title', 'Description', 'Title_en', 'Description_en', 'TextAlt')
 
+
+
 class collaboratorSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
+
     class Meta:
         model = collaborator
-        fields = ('CollaboratorID', 'Name', 'Image', 'Description', 'TextAlt')
+        fields = ('CollaboratorID', 'Name', 'image_url', 'Description', 'TextAlt')  # Eliminar el campo "Image"
+
+    def get_image_url(self, obj):
+        # Generar una URL absoluta para la imagen
+        request = self.context.get('request')
+        if obj.Image:  # Asegúrate de que la imagen existe
+            if request:
+                return request.build_absolute_uri(obj.Image.url)
+            return f"{settings.BASE_URL}{obj.Image.url}"  # Respaldo con BASE_URL
+        return None
+
+
 
 class videoSerializer(serializers.ModelSerializer):
     class Meta:
