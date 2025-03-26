@@ -195,8 +195,8 @@ REST_FRAMEWORK = {
 
 
 #Media files
-#MEDIA_URL = '/media/'
-MEDIA_URL = 'https://draacostafit.com/media/'
+MEDIA_URL = '/media/'
+#MEDIA_URL = 'https://draacostafit.com/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
