@@ -1,9 +1,11 @@
 from rest_framework import serializers
 from django.utils.html import linebreaks
+from django.conf import settings
 from .models import (
     navigation, news, educations, logo, missionValues, whoWeAre, banner, event,
     causes, collaborator, video, whatOurDonorsSay, contact, currency, accountBank
 )
+
 
 def get_field_based_on_language(obj, field_name, context, field_name_en):
     language = context.get('language', 'es')  # For dejault in spanish
@@ -121,12 +123,16 @@ class bannerSerializer(serializers.ModelSerializer):
         model = banner
         fields = ('BannerID', 'Image', 'url_name', 'url_id', 'TextAlt')
 
-    def get_Image(self, obj):
-        request = self.context.get('request')  # Accede al contexto del request
-        if obj.Image:
-            # Construye una URL absoluta para la imagen
-            return request.build_absolute_uri(obj.Image.url)
+    def get_image_url(self, obj):
+        # Generar una URL absoluta usando BASE_URL
+        request = self.context.get('request')
+        if obj.Image:  # Asegúrate de que la imagen existe
+            if request:
+                return request.build_absolute_uri(obj.Image.url)
+            else:
+                return f"{settings.BASE_URL}{obj.Image.url}"
         return None
+
 
 
 class eventSerializer(serializers.ModelSerializer):
