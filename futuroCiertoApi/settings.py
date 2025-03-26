@@ -164,7 +164,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'https://draacostafit.com/static/'
+STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 #STATIC_ROOT= '/var/www/html/media/'
 
@@ -196,8 +196,8 @@ REST_FRAMEWORK = {
 
 
 #Media files
-MEDIA_URL = '/media/'
-#MEDIA_URL = 'https://draacostafit.com/media/'
+#MEDIA_URL = '/media/'
+MEDIA_URL = 'https://draacostafit.com/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
