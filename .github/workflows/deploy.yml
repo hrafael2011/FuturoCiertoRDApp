@@ -16,22 +16,22 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{secrets.DOCKERHUB_USERNAME}}
+          password: ${{secrets.DOCKERHUB_TOKEN}}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/futurociertoapi:latest
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/futurociertoapi:latest
           # Puedes cambiar 'latest' por 'v1' u otra etiqueta si lo prefieres
 
       - name: Deploy to AWS via SSH
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: ${{ secrets.AWS_HOST }}         # IP o dominio de tu instancia AWS
-          username: ${{ secrets.AWS_USER }}       # Usuario SSH (por ejemplo, ec2-user)
+          host: ${{secrets.AWS_HOST}}         # IP o dominio de tu instancia AWS
+          username: ${{secrets.AWS_USER}}       # Usuario SSH (por ejemplo, ec2-user)
           key: ${{ secrets.AWS_SSH_KEY }}         # Tu clave privada (en formato de texto) para SSH
           port: 22                              # Puerto SSH, normalmente 22
           script: |
@@ -39,6 +39,6 @@ jobs:
             docker stop futurocierto_container || true
             docker rm futurocierto_container || true
             echo "Extrayendo imagen actualizada..."
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/futurociertoapi:latest
+            docker pull ${{secrets.DOCKERHUB_USERNAME}}/futurociertoapi:latest
             echo "Ejecutando nuevo contenedor..."
             docker run -d -p 8000:8000 --name futurocierto_container -v /home/***/media:/app/media -v /home/***/staticfiles:/app/staticfiles ***/futurociertoapi:latest && docker exec futurocierto_container bash -c "python manage.py collectstatic --noinput"
