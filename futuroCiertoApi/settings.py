@@ -17,8 +17,8 @@ import os
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 # Base Url
-#BASE_URL = 'https://draacostafit.com'
-BASE_URL ='http://127.0.0.1:8000'
+BASE_URL = 'https://draacostafit.com'
+#BASE_URL ='http://127.0.0.1:8000'
 
 
 
