@@ -12,7 +12,7 @@ COPY . /app
 RUN pip install -r requirements.txt
 
 # Recolectar archivos estáticos
-RUN python manage.py collectstatic --noinput
+#RUN python manage.py collectstatic --noinput
 
 # Exponer el puerto 8000 donde se ejecutará la aplicación
 EXPOSE 8000
