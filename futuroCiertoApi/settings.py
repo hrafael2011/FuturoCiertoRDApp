@@ -27,9 +27,9 @@ SECRET_KEY = 'django-insecure-&=)%5@(0p4(gqw076#8b_f0b46$&^q1&26p7)ck-g^qiqn%+w9
 DEBUG = True
 
 ALLOWED_HOSTS = [#'futurociertord.azurewebsites.net',
-                 #'3.12.151.15',
-                 #'127.0.0.1',
-                 #'localhost',
+                 '3.12.151.15',
+                 '127.0.0.1',
+                 'localhost',
                  'draacostafit.com',
                  'www.draacostafit.com'
                  ]
@@ -195,8 +195,8 @@ REST_FRAMEWORK = {
 
 
 #Media files
-MEDIA_URL = '/media/'
-#MEDIA_URL = 'https://draacostafit.com/media/'
+#MEDIA_URL = '/media/'
+MEDIA_URL = 'https://draacostafit.com/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
