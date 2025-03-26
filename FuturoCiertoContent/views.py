@@ -122,8 +122,15 @@ class whoWeAreView(viewsets.ModelViewSet):
 
 
 class bannerView(viewsets.ModelViewSet):
-    queryset = banner.objects.filter(is_active=True).select_related("Url")
+    queryset = banner.objects.filter(is_active=True)
     serializer_class = bannerSerializer
+
+    def get_serializer_context(self):
+        # Pasar el contexto del request al serializador
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
+
 
 
 class eventView(viewsets.ModelViewSet):

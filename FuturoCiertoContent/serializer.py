@@ -121,6 +121,14 @@ class bannerSerializer(serializers.ModelSerializer):
         model = banner
         fields = ('BannerID', 'Image', 'url_name', 'url_id', 'TextAlt')
 
+    def get_Image(self, obj):
+        request = self.context.get('request')  # Accede al contexto del request
+        if obj.Image:
+            # Construye una URL absoluta para la imagen
+            return request.build_absolute_uri(obj.Image.url)
+        return None
+
+
 class eventSerializer(serializers.ModelSerializer):
     Event = serializers.SerializerMethodField()
     Address = serializers.SerializerMethodField()
