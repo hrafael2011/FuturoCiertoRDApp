@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -195,8 +195,8 @@ REST_FRAMEWORK = {
 
 
 #Media files
-#MEDIA_URL = '/media/'
-MEDIA_URL = 'https://draacostafit.com/media/'
+MEDIA_URL = '/media/'
+#MEDIA_URL = 'https://draacostafit.com/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -211,7 +211,7 @@ TRANSLATOR_API_KEY = config('API_KEY_TRANSLATOR', default=None)
 # ERROR DETECTION BY LOG
 
 # Ruta base de tu proyecto (asegúrate de que esté definida correctamente)
-BASE_DIR = Path(__file__).resolve().parent.parent
+#BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Ruta para guardar el archivo de log
 LOG_DIR = BASE_DIR / "logs"
