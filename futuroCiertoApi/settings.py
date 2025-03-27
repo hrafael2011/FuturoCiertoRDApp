@@ -208,7 +208,8 @@ REST_FRAMEWORK = {
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/app/media/' 
+#MEDIA_ROOT = '/app/media/' 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 from decouple import config
