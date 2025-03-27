@@ -29,7 +29,7 @@ BASE_URL = 'https://draacostafit.com'
 SECRET_KEY = 'django-insecure-&=)%5@(0p4(gqw076#8b_f0b46$&^q1&26p7)ck-g^qiqn%+w9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [#'futurociertord.azurewebsites.net',
                  '3.12.151.15',
@@ -201,13 +201,13 @@ REST_FRAMEWORK = {
 
 
 #Media files
-MEDIA_URL = '/media/'
+#MEDIA_URL = '/media/'
 #MEDIA_URL = 'https://draacostafit.com/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-#MEDIA_URL = '/media/'
-#MEDIA_ROOT = '/home/ec2-user/media/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/app/media/' 
 
 
 from decouple import config

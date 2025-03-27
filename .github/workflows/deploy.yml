@@ -41,4 +41,10 @@ jobs:
             echo "Extrayendo imagen actualizada..."
             docker pull ${{secrets.DOCKERHUB_USERNAME}}/futurociertoapi:latest
             echo "Ejecutando nuevo contenedor..."
-            docker run -d -p 8000:8000 --name futurocierto_container -v /home/***/media:/app/media -v /home/***/staticfiles:/app/staticfiles hendrickrafa/futurociertoapi:latest && docker exec futurocierto_container bash -c "python manage.py collectstatic --noinput"
+            docker run -d -p 8000:8000 --name futurocierto_container -v /home/***/media:/app/media -v /home/***/staticfiles:/app/staticfiles hendrickrafa/futurociertoapi:latest  
+
+            echo "⏳ Esperando a que el contenedor inicie..."
+             sleep 10  # Asegura que el contenedor esté en marcha antes de ejecutar comandos dentro
+
+            echo "📌 Recolectando archivos estáticos..."
+            docker exec futurocierto_container python manage.py collectstatic --noinput
