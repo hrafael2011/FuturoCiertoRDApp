@@ -178,16 +178,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 
- #                       'http://10.0.0.58:5173',  
-  #                      'https://new-page.futurociertord.org',
-   #                     'http://draacostafit.com',       
-    #                    'https://draacostafit.com',      
-     #                   'http://www.draacostafit.com',   
-      #                  'https://www.draacostafit.com' 
-#
- #                       ]
-CORS_ALLOW_ALL_ORIGINS = True 
+CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 
+                        'http://10.0.0.58:5173',  
+                        'https://new-page.futurociertord.org',
+                        'http://draacostafit.com',       
+                        'https://draacostafit.com',      
+                        'http://www.draacostafit.com',   
+                        'https://www.draacostafit.com' 
+
+                        ]
+#CORS_ALLOW_ALL_ORIGINS = True 
 
 
 
