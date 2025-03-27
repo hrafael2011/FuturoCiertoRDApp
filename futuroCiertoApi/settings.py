@@ -211,6 +211,10 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = '/home/ec2-user/media/' 
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Permisos automáticos para archivos subidos
+FILE_UPLOAD_PERMISSIONS = 0o664  # -rw-rw-r--
+FILE_UPLOAD_DIRECTORY_PERMISSIONS = 0o775  # drwxrwxr-x
+
 
 from decouple import config
 

@@ -3,7 +3,7 @@ name: Deploy to AWS
 on:
   push:
     branches:
-      - main  # Se ejecuta al hacer push a la rama main
+      - main
 
 jobs:
   deploy:
@@ -25,26 +25,56 @@ jobs:
           context: .
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/futurociertoapi:latest
-          # Puedes cambiar 'latest' por 'v1' u otra etiqueta si lo prefieres
+
+      - name: Configure AWS Permissions
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{secrets.AWS_HOST}}
+          username: ${{secrets.AWS_USER}}
+          key: ${{secrets.AWS_SSH_KEY}}
+          port: 22
+          script: |
+            echo "🔧 Configurando permisos en el servidor..."
+            sudo mkdir -p /home/ec2-user/media
+            sudo mkdir -p /home/ec2-user/staticfiles
+            sudo chown -R 0:0 /home/ec2-user/media
+            sudo chmod -R 775 /home/ec2-user/media
+            sudo chown -R 0:0 /home/ec2-user/staticfiles
+            sudo chmod -R 775 /home/ec2-user/staticfiles
+            sudo semanage fcontext -a -t container_file_t "/home/ec2-user/media(/.*)?" || true
+            sudo restorecon -Rv /home/ec2-user/media/
 
       - name: Deploy to AWS via SSH
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: ${{secrets.AWS_HOST}}         # IP o dominio de tu instancia AWS
-          username: ${{secrets.AWS_USER}}       # Usuario SSH (por ejemplo, ec2-user)
-          key: ${{ secrets.AWS_SSH_KEY }}         # Tu clave privada (en formato de texto) para SSH
-          port: 22                              # Puerto SSH, normalmente 22
+          host: ${{secrets.AWS_HOST}}
+          username: ${{secrets.AWS_USER}}
+          key: ${{secrets.AWS_SSH_KEY}}
+          port: 22
           script: |
-            echo "Deteniendo contenedor actual (si existe)..."
+            echo "🚀 Iniciando despliegue..."
+            echo "Deteniendo contenedor actual..."
             docker stop futurocierto_container || true
             docker rm futurocierto_container || true
+            
             echo "Extrayendo imagen actualizada..."
             docker pull ${{secrets.DOCKERHUB_USERNAME}}/futurociertoapi:latest
+            
             echo "Ejecutando nuevo contenedor..."
-            docker run -d -p 8000:8000 --name futurocierto_container -v /home/ec2-user/media:/app/media -v /home/ec2-user/staticfiles:/app/staticfiles hendrickrafa/futurociertoapi:latest  
+            docker run -d \
+              -p 8000:8000 \
+              --name futurocierto_container \
+              -v /home/ec2-user/media:/app/media:rw \
+              -v /home/ec2-user/staticfiles:/app/staticfiles:rw \
+              -e FILE_UPLOAD_PERMISSIONS=0o664 \
+              -e FILE_UPLOAD_DIRECTORY_PERMISSIONS=0o775 \
+              ${{secrets.DOCKERHUB_USERNAME}}/futurociertoapi:latest
 
-            echo "⏳ Esperando a que el contenedor inicie..."
-             sleep 10  # Asegura que el contenedor esté en marcha antes de ejecutar comandos dentro
+            echo "⏳ Esperando inicialización..."
+            sleep 15
 
-            echo "📌 Recolectando archivos estáticos..."
+            echo "📌 Configurando la aplicación..."
             docker exec futurocierto_container python manage.py collectstatic --noinput
+            docker exec futurocierto_container python manage.py migrate --noinput
+
+            echo "✅ Despliegue completado exitosamente!"
